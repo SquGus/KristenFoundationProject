@@ -1,0 +1,2877 @@
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.6ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateCourses (20140926190851)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "courses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "price" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140926190851"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+Migrating to CreateRegistrations (20140926191022)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "registrations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "course_id" integer, "full_name" varchar(255), "company" varchar(255), "email" varchar(255), "telephone" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_registrations_on_course_id" ON "registrations" ("course_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140926191022"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to AddParamsStatusTransactionIdPurchasedAtToRegistrations (20140928132405)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "registrations" ADD "notification_params" text[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "registrations" ADD "status" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "registrations" ADD "transaction_id" varchar(255)[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "registrations" ADD "purchased_at" datetime
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140928132405"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_registrations_on_course_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_registrations_on_course_id' AND type='index'
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (0.8ms)[0m  DELETE FROM "courses"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "courses" ("created_at", "name", "price", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2016-02-11 17:05:39.748442"], ["name", "INTRODUCTION TO REPOSTERY (4 Weeks)"], ["price", 475], ["updated_at", "2016-02-11 17:05:39.748442"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "courses" ("created_at", "name", "price", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2016-02-11 17:05:39.753538"], ["name", "THE BEST BUTCHERY COURSE (4 Weeks)"], ["price", 610], ["updated_at", "2016-02-11 17:05:39.753538"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "courses" ("created_at", "name", "price", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2016-02-11 17:05:39.755023"], ["name", "SEA FOOD SECRETS COURSE (8 Weeks)"], ["price", 1485], ["updated_at", "2016-02-11 17:05:39.755023"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 11:05:56 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by CoursesController#index as HTML
+  Rendered courses/index.html.haml within layouts/application (1.6ms)
+  [1m[35mCourse Load (0.1ms)[0m  SELECT "courses".* FROM "courses"
+  Rendered courses/_index.html.haml (5.9ms)
+Completed 200 OK in 563ms (Views: 546.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 11:05:56 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 11:05:56 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 11:05:56 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 11:05:56 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 11:05:56 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 11:05:56 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 11:05:56 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 11:05:56 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 11:05:56 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 11:05:56 -0600
+
+
+Started GET "/assets/code-bg.jpg" for 127.0.0.1 at 2016-02-11 11:05:56 -0600
+
+
+Started GET "/assets/course-bg-arrow.png" for 127.0.0.1 at 2016-02-11 11:05:56 -0600
+
+
+Started GET "/assets/MYRIADPRO-REGULAR.OTF" for 127.0.0.1 at 2016-02-11 11:05:56 -0600
+
+
+Started GET "/fonts/MYRIADPRO-BILD.OTF" for 127.0.0.1 at 2016-02-11 11:05:56 -0600
+
+ActionController::RoutingError (No route matches [GET] "/fonts/MYRIADPRO-BILD.OTF"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.4ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (3.0ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (22.5ms)
+
+
+Started GET "/registrations/new?course_id=3" for 127.0.0.1 at 2016-02-11 11:06:01 -0600
+Processing by RegistrationsController#new as HTML
+  Parameters: {"course_id"=>"3"}
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" = 3 LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (52.4ms)
+  [1m[35mCourse Load (0.1ms)[0m  SELECT "courses".* FROM "courses"
+  Rendered courses/_index.html.haml (3.4ms)
+Completed 200 OK in 113ms (Views: 102.1ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/registrations" for 127.0.0.1 at 2016-02-11 11:06:26 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/gXan6Bavk38j8hqHIPILljTqb1DINl+QokK5SKNlZ0=", "registration"=>{"course_id"=>"3", "full_name"=>"Marco", "company"=>"Company", "email"=>"marcolm@gmail.com", "telephone"=>"4422234791"}, "commit"=>"Registration Payment"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "registrations" ("company", "course_id", "created_at", "email", "full_name", "notification_params", "telephone", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["company", "Company"], ["course_id", 3], ["created_at", "2016-02-11 17:06:26.869215"], ["email", "marcolm@gmail.com"], ["full_name", "Marco"], ["notification_params", "--- {}\n"], ["telephone", "4422234791"], ["updated_at", "2016-02-11 17:06:26.869215"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mCourse Load (0.2ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1  [["id", 3]]
+Redirected to https://www.sandbox.paypal.com/cgi-bin/webscr?amount=1485&business=merchant%40gotealeaf.com&cmd=_xclick&invoice=1&item_name=SEA+FOOD+SECRETS+COURSE+%288+Weeks%29&item_number=3&notify_url=http%3A%2F%2F3c99b47d.ngrok.com%2Fhook&quantity=1&return=http%3A%2F%2F3c99b47d.ngrok.com%2Fregistrations%2F1&upload=1
+Completed 302 Found in 16ms (ActiveRecord: 1.3ms)
+
+
+Started GET "/registrations/new?course_id=3" for 127.0.0.1 at 2016-02-11 11:06:33 -0600
+Processing by RegistrationsController#new as HTML
+  Parameters: {"course_id"=>"3"}
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" = 3 LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (4.9ms)
+  [1m[35mCourse Load (0.2ms)[0m  SELECT "courses".* FROM "courses"
+  Rendered courses/_index.html.haml (1.9ms)
+Completed 200 OK in 90ms (Views: 87.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 11:28:56 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by CoursesController#index as HTML
+  Rendered courses/index.html.haml within layouts/application (1.6ms)
+  [1m[35mCourse Load (0.4ms)[0m  SELECT "courses".* FROM "courses"
+  Rendered courses/_index.html.haml (38.6ms)
+Completed 200 OK in 173ms (Views: 155.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 11:28:56 -0600
+Processing by CoursesController#index as HTML
+  Rendered courses/index.html.haml within layouts/application (0.1ms)
+  [1m[36mCourse Load (0.2ms)[0m  [1mSELECT "courses".* FROM "courses"[0m
+  Rendered courses/_index.html.haml (2.3ms)
+Completed 200 OK in 43ms (Views: 42.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/code-bg.jpg" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/course-bg-arrow.png" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/fonts/MYRIADPRO-BILD.OTF" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+ActionController::RoutingError (No route matches [GET] "/fonts/MYRIADPRO-BILD.OTF"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.4ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (5.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (27.6ms)
+
+
+Started GET "/assets/MYRIADPRO-REGULAR.OTF" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/code-bg.jpg" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/course-bg-arrow.png" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/assets/MYRIADPRO-REGULAR.OTF" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+
+Started GET "/fonts/MYRIADPRO-BILD.OTF" for 127.0.0.1 at 2016-02-11 11:28:57 -0600
+
+ActionController::RoutingError (No route matches [GET] "/fonts/MYRIADPRO-BILD.OTF"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.1ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (15.7ms)
+
+
+Started GET "/registrations/new?course_id=2" for 127.0.0.1 at 2016-02-11 11:28:59 -0600
+Processing by RegistrationsController#new as HTML
+  Parameters: {"course_id"=>"2"}
+  [1m[35mCourse Load (0.2ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" = 2 LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (19.1ms)
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT "courses".* FROM "courses"[0m
+  Rendered courses/_index.html.haml (3.3ms)
+Completed 200 OK in 112ms (Views: 62.2ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/registrations" for 127.0.0.1 at 2016-02-11 11:29:36 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/gXan6Bavk38j8hqHIPILljTqb1DINl+QokK5SKNlZ0=", "registration"=>{"course_id"=>"2", "full_name"=>"marco lopez", "company"=>"company", "email"=>"marcolm485@gmail.com", "telephone"=>"4421913476"}, "commit"=>"Registration Payment"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (1.5ms)[0m  [1mINSERT INTO "registrations" ("company", "course_id", "created_at", "email", "full_name", "notification_params", "telephone", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["company", "company"], ["course_id", 2], ["created_at", "2016-02-11 17:29:36.963029"], ["email", "marcolm485@gmail.com"], ["full_name", "marco lopez"], ["notification_params", "--- {}\n"], ["telephone", "4421913476"], ["updated_at", "2016-02-11 17:29:36.963029"]]
+  [1m[35m (0.4ms)[0m  commit transaction
+  [1m[36mCourse Load (0.2ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1[0m  [["id", 2]]
+Redirected to https://www.sandbox.paypal.com/cgi-bin/webscr?amount=610&business=proyectokristen-facilitator%40gmail.com&cmd=_xclick&invoice=2&item_name=THE+BEST+BUTCHERY+COURSE+%284+Weeks%29&item_number=2&notify_url=http%3A%2F%2F0a9eaa74.ngrok.io%2Fhook&quantity=1&return=http%3A%2F%2F0a9eaa74.ngrok.io%2Fregistrations%2F2&upload=1
+Completed 302 Found in 60ms (ActiveRecord: 2.1ms)
+
+
+Started POST "/hook" for 173.0.82.126 at 2016-02-11 11:33:21 -0600
+Processing by RegistrationsController#hook as HTML
+  Parameters: {"mc_gross"=>"610.00", "invoice"=>"2", "protection_eligibility"=>"Eligible", "address_status"=>"unconfirmed", "payer_id"=>"UPNX528DB7HKE", "tax"=>"0.00", "address_street"=>"Calle Juarez 1", "payment_date"=>"09:33:16 Feb 11, 2016 PST", "payment_status"=>"Completed", "charset"=>"windows-1252", "address_zip"=>"11580", "first_name"=>"test", "mc_fee"=>"28.29", "address_country_code"=>"MX", "address_name"=>"test buyer", "notify_version"=>"3.8", "custom"=>"", "payer_status"=>"verified", "business"=>"proyectokristen-facilitator@gmail.com", "address_country"=>"Mexico", "address_city"=>"Miguel Hidalgo", "quantity"=>"1", "verify_sign"=>"AMxgjRPGfUEBJ2lGn1qg0jiE5fuHA.GEAjIdGnjgtVbCtMZL3WBGSvhp", "payer_email"=>"proyectokristen-buyer@gmail.com", "txn_id"=>"0X2091710D586330T", "payment_type"=>"instant", "last_name"=>"buyer", "address_state"=>"Ciudad de Mexico", "receiver_email"=>"proyectokristen-facilitator@gmail.com", "payment_fee"=>"28.29", "receiver_id"=>"DMAF5SZDFA492", "txn_type"=>"web_accept", "item_name"=>"THE BEST BUTCHERY COURSE (4 Weeks)", "mc_currency"=>"USD", "item_number"=>"2", "residence_country"=>"MX", "test_ipn"=>"1", "handling_amount"=>"0.00", "transaction_subject"=>"", "payment_gross"=>"610.00", "shipping"=>"0.00", "ipn_track_id"=>"517ed0090066"}
+  [1m[35mRegistration Load (0.1ms)[0m  SELECT  "registrations".* FROM "registrations"  WHERE "registrations"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "registrations" SET "notification_params" = ?, "purchased_at" = ?, "status" = ?, "transaction_id" = ?, "updated_at" = ? WHERE "registrations"."id" = 2  [["notification_params", "--- !ruby/hash:ActionController::Parameters\nmc_gross: '610.00'\ninvoice: '2'\nprotection_eligibility: Eligible\naddress_status: unconfirmed\npayer_id: UPNX528DB7HKE\ntax: '0.00'\naddress_street: Calle Juarez 1\npayment_date: 09:33:16 Feb 11, 2016 PST\npayment_status: Completed\ncharset: windows-1252\naddress_zip: '11580'\nfirst_name: test\nmc_fee: '28.29'\naddress_country_code: MX\naddress_name: test buyer\nnotify_version: '3.8'\ncustom: ''\npayer_status: verified\nbusiness: proyectokristen-facilitator@gmail.com\naddress_country: Mexico\naddress_city: Miguel Hidalgo\nquantity: '1'\nverify_sign: AMxgjRPGfUEBJ2lGn1qg0jiE5fuHA.GEAjIdGnjgtVbCtMZL3WBGSvhp\npayer_email: proyectokristen-buyer@gmail.com\ntxn_id: 0X2091710D586330T\npayment_type: instant\nlast_name: buyer\naddress_state: Ciudad de Mexico\nreceiver_email: proyectokristen-facilitator@gmail.com\npayment_fee: '28.29'\nreceiver_id: DMAF5SZDFA492\ntxn_type: web_accept\nitem_name: THE BEST BUTCHERY COURSE (4 Weeks)\nmc_currency: USD\nitem_number: '2'\nresidence_country: MX\ntest_ipn: '1'\nhandling_amount: '0.00'\ntransaction_subject: ''\npayment_gross: '610.00'\nshipping: '0.00'\nipn_track_id: 517ed0090066\ncontroller: registrations\naction: hook\n"], ["purchased_at", "2016-02-11 17:33:21.782631"], ["status", "Completed"], ["transaction_id", "0X2091710D586330T"], ["updated_at", "2016-02-11 17:33:21.783302"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+  Rendered text template (0.0ms)
+Completed 200 OK in 9ms (Views: 1.3ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/registrations/2" for 187.140.214.220 at 2016-02-11 11:33:46 -0600
+Processing by RegistrationsController#show as HTML
+  Parameters: {"mc_gross"=>"610.00", "invoice"=>"2", "protection_eligibility"=>"Eligible", "address_status"=>"unconfirmed", "payer_id"=>"UPNX528DB7HKE", "tax"=>"0.00", "address_street"=>"Calle Juarez 1", "payment_date"=>"09:33:16 Feb 11, 2016 PST", "payment_status"=>"Completed", "charset"=>"windows-1252", "address_zip"=>"11580", "first_name"=>"test", "mc_fee"=>"28.29", "address_country_code"=>"MX", "address_name"=>"test buyer", "notify_version"=>"3.8", "custom"=>"", "payer_status"=>"verified", "business"=>"proyectokristen-facilitator@gmail.com", "address_country"=>"Mexico", "address_city"=>"Miguel Hidalgo", "quantity"=>"1", "payer_email"=>"proyectokristen-buyer@gmail.com", "verify_sign"=>"AFcWxV21C7fd0v3bYYYRCpSSRl31AC8snoLUkGcDR8Vl.Ei71r8p1JK.", "txn_id"=>"0X2091710D586330T", "payment_type"=>"instant", "last_name"=>"buyer", "address_state"=>"Ciudad de Mexico", "receiver_email"=>"proyectokristen-facilitator@gmail.com", "payment_fee"=>"28.29", "receiver_id"=>"DMAF5SZDFA492", "txn_type"=>"web_accept", "item_name"=>"THE BEST BUTCHERY COURSE (4 Weeks)", "mc_currency"=>"USD", "item_number"=>"2", "residence_country"=>"MX", "test_ipn"=>"1", "handling_amount"=>"0.00", "transaction_subject"=>"", "payment_gross"=>"610.00", "shipping"=>"0.00", "auth"=>"AmCJJUNXEB4hmR9ZQQrrGNbWOfUFWV34FSiDDn.Nujms19-TbeMO3DTI7lp6HSSZ.doBnVOZn18Rzu8Skt7BP4Q", "id"=>"2"}
+Can't verify CSRF token authenticity
+  [1m[35mRegistration Load (0.1ms)[0m  SELECT  "registrations".* FROM "registrations"  WHERE "registrations"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered registrations/show.html.haml within layouts/application (4.7ms)
+  [1m[35mCourse Load (0.1ms)[0m  SELECT "courses".* FROM "courses"
+  Rendered courses/_index.html.haml (1.6ms)
+Completed 200 OK in 47ms (Views: 44.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 187.140.214.220 at 2016-02-11 11:33:47 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 187.140.214.220 at 2016-02-11 11:33:47 -0600
+
+
+Started GET "/assets/form.css?body=1" for 187.140.214.220 at 2016-02-11 11:33:47 -0600
+
+
+Started GET "/assets/front.css?body=1" for 187.140.214.220 at 2016-02-11 11:33:47 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 187.140.214.220 at 2016-02-11 11:33:47 -0600
+
+
+Started GET "/assets/application.css?body=1" for 187.140.214.220 at 2016-02-11 11:33:47 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 187.140.214.220 at 2016-02-11 11:33:47 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 187.140.214.220 at 2016-02-11 11:33:47 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 187.140.214.220 at 2016-02-11 11:33:47 -0600
+
+
+Started GET "/assets/application.js?body=1" for 187.140.214.220 at 2016-02-11 11:33:47 -0600
+
+
+Started GET "/assets/code-bg.jpg" for 187.140.214.220 at 2016-02-11 11:33:48 -0600
+
+
+Started GET "/assets/course-bg-arrow.png" for 187.140.214.220 at 2016-02-11 11:33:48 -0600
+
+
+Started GET "/assets/MYRIADPRO-REGULAR.OTF" for 187.140.214.220 at 2016-02-11 11:33:48 -0600
+
+
+Started GET "/fonts/MYRIADPRO-BILD.OTF" for 187.140.214.220 at 2016-02-11 11:33:48 -0600
+
+ActionController::RoutingError (No route matches [GET] "/fonts/MYRIADPRO-BILD.OTF"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (17.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:47:08 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by CoursesController#index as HTML
+  Rendered courses/index.html.haml within layouts/application (1.4ms)
+Completed 500 Internal Server Error in 34ms
+
+ActionView::Template::Error (The line was indented 2 levels deeper than the previous line.):
+     7:     %link{:href => "http://fonts.googleapis.com/css?family=Crete+Round:400,400italic|Open+Sans:400,700,800", :rel => "stylesheet"}/
+     8:     = csrf_meta_tags
+     9:   %body
+    10:       %header
+    11:               %ul
+    12:                 %li
+    13:                   %a{:href => "/faq"} FAQ
+  app/views/layouts/application.html.haml:10
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (13.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:47:24 -0600
+Processing by CoursesController#index as HTML
+  Rendered courses/index.html.haml within layouts/application (0.1ms)
+Completed 500 Internal Server Error in 3ms
+
+ActionView::Template::Error (The line was indented 4 levels deeper than the previous line.):
+     8:     = csrf_meta_tags
+     9:   %body
+    10:     %header
+    11:             %ul
+    12:               %li
+    13:                 %a{:href => "/faq"} FAQ
+    14:               %li
+  app/views/layouts/application.html.haml:11
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (9.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:47:38 -0600
+Processing by CoursesController#index as HTML
+  Rendered courses/index.html.haml within layouts/application (0.1ms)
+  [1m[35mCourse Load (0.4ms)[0m  SELECT "courses".* FROM "courses"
+  Rendered courses/_index.html.haml (8.7ms)
+Completed 200 OK in 182ms (Views: 180.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 19:47:38 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 19:47:38 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 19:47:38 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 19:47:38 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 19:47:38 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 19:47:38 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 19:47:38 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 19:47:38 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 19:47:38 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 19:47:38 -0600
+
+
+Started GET "/assets/course-bg-arrow.png" for 127.0.0.1 at 2016-02-11 19:47:38 -0600
+
+
+Started GET "/assets/MYRIADPRO-REGULAR.OTF" for 127.0.0.1 at 2016-02-11 19:47:38 -0600
+
+
+Started GET "/fonts/MYRIADPRO-BILD.OTF" for 127.0.0.1 at 2016-02-11 19:47:38 -0600
+
+ActionController::RoutingError (No route matches [GET] "/fonts/MYRIADPRO-BILD.OTF"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.5ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (58.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:47:41 -0600
+Processing by CoursesController#index as HTML
+  Rendered courses/index.html.haml within layouts/application (0.1ms)
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT "courses".* FROM "courses"[0m
+  Rendered courses/_index.html.haml (1.8ms)
+Completed 200 OK in 41ms (Views: 40.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/fonts/MYRIADPRO-BILD.OTF" for 127.0.0.1 at 2016-02-11 19:47:41 -0600
+
+ActionController::RoutingError (No route matches [GET] "/fonts/MYRIADPRO-BILD.OTF"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (18.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:48:16 -0600
+Processing by CoursesController#index as HTML
+  Rendered courses/index.html.haml within layouts/application (0.1ms)
+  [1m[35mCourse Load (0.1ms)[0m  SELECT "courses".* FROM "courses"
+  Rendered courses/_index.html.haml (2.0ms)
+Completed 200 OK in 42ms (Views: 41.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 19:48:16 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 19:48:16 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 19:48:16 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 19:48:16 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 19:48:16 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 19:48:16 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 19:48:16 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 19:48:16 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 19:48:16 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 19:48:16 -0600
+
+
+Started GET "/assets/course-bg-arrow.png" for 127.0.0.1 at 2016-02-11 19:48:16 -0600
+
+
+Started GET "/assets/MYRIADPRO-REGULAR.OTF" for 127.0.0.1 at 2016-02-11 19:48:16 -0600
+
+
+Started GET "/fonts/MYRIADPRO-BILD.OTF" for 127.0.0.1 at 2016-02-11 19:48:16 -0600
+
+ActionController::RoutingError (No route matches [GET] "/fonts/MYRIADPRO-BILD.OTF"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (18.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:51:56 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.3ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (13.2ms)
+Completed 500 Internal Server Error in 27ms
+
+ActionView::Template::Error (undefined method `id' for nil:NilClass):
+    12:                 - @registration.errors.full_messages.each do |message|
+    13:                   %li= message
+    14:           .field
+    15:             = f.hidden_field :course_id, value: @course.id
+    16:           .field
+    17:             = f.label :full_name
+    18:             = f.text_field :full_name
+  app/views/registrations/new.html.haml:15:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328284572600'
+  app/views/registrations/new.html.haml:5:in `_app_views_registrations_new_html_haml__3551188651822597959_70328284572600'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.5ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (7.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:52:20 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (53.2ms)
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT "courses".* FROM "courses"[0m
+  Rendered courses/_index.html.haml (4.3ms)
+Completed 200 OK in 98ms (Views: 96.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 19:52:20 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 19:52:20 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 19:52:20 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 19:52:20 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 19:52:20 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 19:52:20 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 19:52:20 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 19:52:20 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 19:52:20 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 19:52:20 -0600
+
+
+Started GET "/assets/course-bg-arrow.png" for 127.0.0.1 at 2016-02-11 19:52:20 -0600
+
+
+Started GET "/assets/MYRIADPRO-REGULAR.OTF" for 127.0.0.1 at 2016-02-11 19:52:20 -0600
+
+
+Started GET "/fonts/MYRIADPRO-BILD.OTF" for 127.0.0.1 at 2016-02-11 19:52:20 -0600
+
+ActionController::RoutingError (No route matches [GET] "/fonts/MYRIADPRO-BILD.OTF"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (17.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:52:49 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (4.4ms)
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT "courses".* FROM "courses"[0m
+  Rendered courses/_index.html.haml (1.5ms)
+Completed 200 OK in 93ms (Views: 91.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 19:52:49 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 19:52:49 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 19:52:49 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 19:52:49 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 19:52:49 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 19:52:49 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 19:52:49 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 19:52:49 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 19:52:49 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 19:52:49 -0600
+
+
+Started GET "/assets/course-bg-arrow.png" for 127.0.0.1 at 2016-02-11 19:52:49 -0600
+
+
+Started GET "/assets/MYRIADPRO-REGULAR.OTF" for 127.0.0.1 at 2016-02-11 19:52:49 -0600
+
+
+Started GET "/fonts/MYRIADPRO-BILD.OTF" for 127.0.0.1 at 2016-02-11 19:52:49 -0600
+
+ActionController::RoutingError (No route matches [GET] "/fonts/MYRIADPRO-BILD.OTF"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.1ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (15.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:53:00 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (3.8ms)
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT "courses".* FROM "courses"[0m
+  Rendered courses/_index.html.haml (1.9ms)
+Completed 200 OK in 52ms (Views: 50.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:00 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:00 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:00 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:00 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:00 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:00 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:00 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:00 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:00 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:00 -0600
+
+
+Started GET "/assets/course-bg-arrow.png" for 127.0.0.1 at 2016-02-11 19:53:00 -0600
+
+
+Started GET "/assets/MYRIADPRO-REGULAR.OTF" for 127.0.0.1 at 2016-02-11 19:53:00 -0600
+
+
+Started GET "/fonts/MYRIADPRO-BILD.OTF" for 127.0.0.1 at 2016-02-11 19:53:00 -0600
+
+ActionController::RoutingError (No route matches [GET] "/fonts/MYRIADPRO-BILD.OTF"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.4ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (19.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:53:24 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (0.6ms)
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT "courses".* FROM "courses"[0m
+  Rendered courses/_index.html.haml (1.8ms)
+Completed 200 OK in 88ms (Views: 86.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:24 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:24 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:24 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:24 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:24 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:25 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:25 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:25 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:25 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:25 -0600
+
+
+Started GET "/assets/course-bg-arrow.png" for 127.0.0.1 at 2016-02-11 19:53:25 -0600
+
+
+Started GET "/assets/MYRIADPRO-REGULAR.OTF" for 127.0.0.1 at 2016-02-11 19:53:25 -0600
+
+
+Started GET "/fonts/MYRIADPRO-BILD.OTF" for 127.0.0.1 at 2016-02-11 19:53:25 -0600
+
+ActionController::RoutingError (No route matches [GET] "/fonts/MYRIADPRO-BILD.OTF"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.5ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (18.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:53:30 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.2ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (0.7ms)
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT "courses".* FROM "courses"[0m
+  Rendered courses/_index.html.haml (3.5ms)
+Completed 200 OK in 53ms (Views: 50.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:53:45 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (3.7ms)
+Completed 200 OK in 90ms (Views: 88.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:45 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:45 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:45 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:45 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:45 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:45 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:45 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:45 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:45 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:45 -0600
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:53:50 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (3.9ms)
+Completed 200 OK in 40ms (Views: 38.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:51 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:51 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:51 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:51 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:51 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:51 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:51 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:51 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:51 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:51 -0600
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:53:57 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (1.9ms)
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT "courses".* FROM "courses"[0m
+  Rendered courses/_index.html.haml (1.6ms)
+Completed 200 OK in 94ms (Views: 92.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:57 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:57 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:57 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:57 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:57 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 19:53:57 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:57 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:57 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:57 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 19:53:57 -0600
+
+
+Started GET "/assets/course-bg-arrow.png" for 127.0.0.1 at 2016-02-11 19:53:57 -0600
+
+
+Started GET "/assets/MYRIADPRO-REGULAR.OTF" for 127.0.0.1 at 2016-02-11 19:53:57 -0600
+
+
+Started GET "/fonts/MYRIADPRO-BILD.OTF" for 127.0.0.1 at 2016-02-11 19:53:57 -0600
+
+ActionController::RoutingError (No route matches [GET] "/fonts/MYRIADPRO-BILD.OTF"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.1ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (16.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:54:03 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (2.2ms)
+Completed 200 OK in 40ms (Views: 38.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 19:54:03 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 19:54:03 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 19:54:03 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 19:54:03 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 19:54:03 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 19:54:03 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 19:54:03 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 19:54:03 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 19:54:03 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 19:54:03 -0600
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:54:32 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (0.6ms)
+Completed 500 Internal Server Error in 3ms
+
+ActionView::Template::Error (Inconsistent indentation: 10 spaces used for indentation, but the rest of the document was indented using 8 spaces.):
+    1: .wrapper-inside
+    2:         = form_for @registration, html: { class: "basic-grey" } do |f|
+    3:           - if @registration.errors.any?
+    4:             #error_explanation
+    5:               %h2
+    6:                 = pluralize(@registration.errors.count, "error")
+  app/views/registrations/new.html.haml:3
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:54:47 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (3.3ms)
+Completed 500 Internal Server Error in 6ms
+
+ActionView::Template::Error (undefined method `id' for nil:NilClass):
+     9:           - @registration.errors.full_messages.each do |message|
+    10:             %li= message
+    11:     .field
+    12:       = f.hidden_field :course_id, value: @course.id
+    13:     .field
+    14:       = f.label :full_name
+    15:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:12:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328242461880'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328242461880'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (7.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:55:07 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.2ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (3.4ms)
+Completed 500 Internal Server Error in 7ms
+
+ActionView::Template::Error (undefined method `id' for nil:NilClass):
+     9:           - @registration.errors.full_messages.each do |message|
+    10:             %li= message
+    11:     .field
+    12:       = f.text_field :course_id, value: @course.id
+    13:     .field
+    14:       = f.label :full_name
+    15:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:12:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328283095880'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328283095880'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 19:55:13 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (3.5ms)
+Completed 200 OK in 43ms (Views: 41.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 19:55:13 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 19:55:13 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 19:55:13 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 19:55:13 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 19:55:13 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 19:55:13 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 19:55:13 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 19:55:13 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 19:55:13 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 19:55:13 -0600
+
+
+Started POST "/registrations" for 127.0.0.1 at 2016-02-11 19:57:16 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/gXan6Bavk38j8hqHIPILljTqb1DINl+QokK5SKNlZ0=", "registration"=>{"course_id"=>"", "full_name"=>"Marco", "company"=>"Marco", "email"=>"Marco", "telephone"=>"marco"}, "commit"=>"Registration Payment"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.5ms)[0m  INSERT INTO "registrations" ("company", "created_at", "email", "full_name", "notification_params", "telephone", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["company", "Marco"], ["created_at", "2016-02-12 01:57:16.691780"], ["email", "Marco"], ["full_name", "Marco"], ["notification_params", "--- {}\n"], ["telephone", "marco"], ["updated_at", "2016-02-12 01:57:16.691780"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+Completed 500 Internal Server Error in 52ms
+
+NoMethodError (undefined method `price' for nil:NilClass):
+  app/models/registration.rb:14:in `paypal_url'
+  app/controllers/registrations_controller.rb:23:in `create'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.5ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (12.3ms)
+
+
+Started POST "/registrations" for 127.0.0.1 at 2016-02-11 20:03:19 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/gXan6Bavk38j8hqHIPILljTqb1DINl+QokK5SKNlZ0=", "registration"=>{"course_id"=>"", "full_name"=>"Marco", "company"=>"Marco", "email"=>"Marco", "telephone"=>"marco"}, "commit"=>"Registration Payment"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "registrations" ("company", "created_at", "email", "full_name", "notification_params", "telephone", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["company", "Marco"], ["created_at", "2016-02-12 02:03:19.517882"], ["email", "Marco"], ["full_name", "Marco"], ["notification_params", "--- {}\n"], ["telephone", "marco"], ["updated_at", "2016-02-12 02:03:19.517882"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+Completed 500 Internal Server Error in 4ms
+
+NoMethodError (undefined method `price' for nil:NilClass):
+  app/models/registration.rb:14:in `paypal_url'
+  app/controllers/registrations_controller.rb:23:in `create'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (16.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:03:25 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (5.2ms)
+Completed 500 Internal Server Error in 9ms
+
+ActionView::Template::Error (undefined method `merge' for 1:Fixnum):
+     9:           - @registration.errors.full_messages.each do |message|
+    10:             %li= message
+    11:     .field
+    12:       = f.text_field :course_id, value = 1
+    13:     .field
+    14:       = f.text_field :course_price
+    15:     .field
+  app/views/registrations/new.html.haml:12:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328283757100'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328283757100'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:03:25 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.3ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (1.3ms)
+Completed 500 Internal Server Error in 6ms
+
+ActionView::Template::Error (undefined method `merge' for 1:Fixnum):
+     9:           - @registration.errors.full_messages.each do |message|
+    10:             %li= message
+    11:     .field
+    12:       = f.text_field :course_id, value = 1
+    13:     .field
+    14:       = f.text_field :course_price
+    15:     .field
+  app/views/registrations/new.html.haml:12:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328283757100'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328283757100'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.5ms)
+
+
+Started GET "/apple-touch-icon-precomposed.png" for 127.0.0.1 at 2016-02-11 20:03:25 -0600
+
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon-precomposed.png"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.3ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.1ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (19.1ms)
+
+
+Started GET "/apple-touch-icon-precomposed.png" for 127.0.0.1 at 2016-02-11 20:03:25 -0600
+
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon-precomposed.png"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.0ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (37.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (58.4ms)
+
+
+Started GET "/apple-touch-icon.png" for 127.0.0.1 at 2016-02-11 20:03:25 -0600
+
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon.png"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.1ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (15.4ms)
+
+
+Started GET "/apple-touch-icon.png" for 127.0.0.1 at 2016-02-11 20:03:25 -0600
+
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon.png"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.4ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (15.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:03:25 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (1.0ms)
+Completed 500 Internal Server Error in 4ms
+
+ActionView::Template::Error (undefined method `merge' for 1:Fixnum):
+     9:           - @registration.errors.full_messages.each do |message|
+    10:             %li= message
+    11:     .field
+    12:       = f.text_field :course_id, value = 1
+    13:     .field
+    14:       = f.text_field :course_price
+    15:     .field
+  app/views/registrations/new.html.haml:12:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328283757100'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328283757100'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.4ms)
+
+
+Started GET "/apple-touch-icon-precomposed.png" for 127.0.0.1 at 2016-02-11 20:03:25 -0600
+
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon-precomposed.png"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.3ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (15.6ms)
+
+
+Started GET "/apple-touch-icon.png" for 127.0.0.1 at 2016-02-11 20:03:25 -0600
+
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon.png"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.2ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (15.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:04:28 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (3.5ms)
+Completed 500 Internal Server Error in 8ms
+
+ActionView::Template::Error (undefined method `course_price' for #<Registration:0x007fed2984b980>):
+    11:     .field
+    12:       = f.text_field :course_id, value: 1
+    13:     .field
+    14:       = f.text_field :course_price
+    15:     .field
+    16:       = f.label :full_name
+    17:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:14:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328290279600'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328290279600'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (9.3ms)
+
+
+Started GET "/apple-touch-icon-precomposed.png" for 127.0.0.1 at 2016-02-11 20:04:28 -0600
+
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon-precomposed.png"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (38.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.1ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (54.6ms)
+
+
+Started GET "/apple-touch-icon.png" for 127.0.0.1 at 2016-02-11 20:04:29 -0600
+
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon.png"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.5ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.0ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (17.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:05:43 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (11.4ms)
+Completed 500 Internal Server Error in 19ms
+
+ActionView::Template::Error (undefined method `course_price' for #<Registration:0x007fed28c6e518>):
+    11:     .field
+    12:       = f.text_field :course_id, value: 1
+    13:     .field
+    14:       = f.text_field :course_price
+    15:     .field
+    16:       = f.label :full_name
+    17:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:14:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328290279600'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328290279600'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (10.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:05:44 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (1.4ms)
+Completed 500 Internal Server Error in 4ms
+
+ActionView::Template::Error (undefined method `course_price' for #<Registration:0x007fed28f0c388>):
+    11:     .field
+    12:       = f.text_field :course_id, value: 1
+    13:     .field
+    14:       = f.text_field :course_price
+    15:     .field
+    16:       = f.label :full_name
+    17:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:14:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328290279600'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328290279600'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (9.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:05:47 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.2ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (1.7ms)
+Completed 500 Internal Server Error in 5ms
+
+ActionView::Template::Error (undefined method `course_price' for #<Registration:0x007fed299b8c28>):
+    11:     .field
+    12:       = f.text_field :course_id, value: 1
+    13:     .field
+    14:       = f.text_field :course_price
+    15:     .field
+    16:       = f.label :full_name
+    17:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:14:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328290279600'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328290279600'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.3ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (9.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:06:50 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (1.4ms)
+Completed 500 Internal Server Error in 4ms
+
+ActionView::Template::Error (undefined method `course_price' for #<Registration:0x007fed23d190a8>):
+    11:     .field
+    12:       = f.text_field :course_id, value: 1
+    13:     .field
+    14:       = f.text_field :course_price
+    15:     .field
+    16:       = f.label :full_name
+    17:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:14:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328290279600'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328290279600'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (9.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:09:27 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (7.0ms)
+Completed 500 Internal Server Error in 14ms
+
+ActionView::Template::Error (undefined method `course_price' for #<Registration:0x007fed28c95208>):
+    11:     .field
+    12:       = f.text_field :course_id, value: 1
+    13:     .field
+    14:       = f.text_field :course_price
+    15:     .field
+    16:       = f.label :full_name
+    17:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:14:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328290279600'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328290279600'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (9.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:09:40 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (4.2ms)
+Completed 500 Internal Server Error in 7ms
+
+ActionView::Template::Error (undefined method `amount' for #<Registration:0x007fed28f35d78>):
+    11:     .field
+    12:       = f.text_field :course_id, value: 1
+    13:     .field
+    14:       = f.text_field :amount
+    15:     .field
+    16:       = f.label :full_name
+    17:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:14:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328285520460'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328285520460'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:10:42 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (5.9ms)
+Completed 500 Internal Server Error in 12ms
+
+ActionView::Template::Error (undefined method `amount' for #<Registration:0x007fed23331d88>):
+    11:     .field
+    12:       = f.text_field :course_id, value: 1
+    13:     .field
+    14:       = f.text_field :amount
+    15:     .field
+    16:       = f.label :full_name
+    17:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:14:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328285520460'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328285520460'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.5ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (7.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:11:31 -0600
+Processing by RegistrationsController#new as HTML
+Completed 500 Internal Server Error in 2ms
+
+SyntaxError (/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/models/registration.rb:4: syntax error, unexpected ','
+... validates :full_name, amount:, :company, :email, :telephone...
+...                               ^):
+  app/models/registration.rb:4: syntax error, unexpected ','
+  app/controllers/registrations_controller.rb:15:in `new'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (12.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:11:45 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (6.6ms)
+Completed 500 Internal Server Error in 13ms
+
+ActionView::Template::Error (undefined method `amount' for #<Registration:0x007fed298435f0>):
+    11:     .field
+    12:       = f.text_field :course_id, value: 1
+    13:     .field
+    14:       = f.text_field :amount
+    15:     .field
+    16:       = f.label :full_name
+    17:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:14:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328285520460'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328285520460'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (9.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:12:03 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.2ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (1.5ms)
+Completed 500 Internal Server Error in 4ms
+
+ActionView::Template::Error (undefined method `amount' for #<Registration:0x007fed23cb8618>):
+    11:     .field
+    12:       = f.text_field :course_id, value: 1
+    13:     .field
+    14:       = f.text_field :amount
+    15:     .field
+    16:       = f.label :full_name
+    17:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:14:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328285520460'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328285520460'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:12:04 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (1.3ms)
+Completed 500 Internal Server Error in 4ms
+
+ActionView::Template::Error (undefined method `amount' for #<Registration:0x007fed28a0cb30>):
+    11:     .field
+    12:       = f.text_field :course_id, value: 1
+    13:     .field
+    14:       = f.text_field :amount
+    15:     .field
+    16:       = f.label :full_name
+    17:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:14:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328285520460'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328285520460'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:13:15 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (3.8ms)
+Completed 500 Internal Server Error in 7ms
+
+ActionView::Template::Error (undefined method `amount' for #<Registration:0x007fed28caf900>):
+    12:       = f.text_field :course_id, value: 1
+    13:     .field
+    14:       = f.label :amount
+    15:       = f.text_field :amount
+    16:     .field
+    17:       = f.label :full_name
+    18:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:15:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328284197080'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328284197080'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:13:25 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (4.8ms)
+Completed 200 OK in 42ms (Views: 40.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 20:13:25 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 20:13:25 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 20:13:25 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 20:13:25 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 20:13:25 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 20:13:25 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 20:13:25 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 20:13:25 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 20:13:25 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 20:13:25 -0600
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:13:34 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (4.0ms)
+Completed 500 Internal Server Error in 7ms
+
+ActionView::Template::Error (undefined method `amount' for #<Registration:0x007fed2888ead8>):
+    12:       = f.text_field :course_id, value: 1
+    13:     .field
+    14:       = f.label :amount
+    15:       = f.text_field :amount
+    16:     .field
+    17:       = f.label :full_name
+    18:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:15:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328282051540'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328282051540'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:15:40 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (7.1ms)
+Completed 500 Internal Server Error in 17ms
+
+ActionView::Template::Error (undefined method `amount' for #<Registration:0x007fed28e163c0>):
+    12:       = f.text_field :course_id, value: 1
+    13:     .field
+    14:       = f.label :amount
+    15:       = f.text_field :amount
+    16:     .field
+    17:       = f.label :full_name
+    18:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:15:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328282051540'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328282051540'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (11.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:16:25 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (43.1ms)
+Completed 500 Internal Server Error in 49ms
+
+ActionView::Template::Error (undefined method `amount' for #<Registration:0x007fed29b1bac0>):
+    12:       = f.text_field :course_id, value: 1
+    13:     .field
+    14:       = f.label :amount
+    15:       = f.text_field :amount
+    16:     .field
+    17:       = f.label :full_name
+    18:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:15:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328282051540'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328282051540'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (10.6ms)
+
+
+Started GET "/registrations" for 127.0.0.1 at 2016-02-11 20:16:26 -0600
+Processing by RegistrationsController#index as HTML
+  [1m[35mRegistration Load (0.2ms)[0m  SELECT "registrations".* FROM "registrations"
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered registrations/index.html.haml within layouts/application (10.1ms)
+Completed 500 Internal Server Error in 14ms
+
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    15:           %tbody
+    16:             - @registrations.each do |registration|
+    17:               %tr
+    18:                 %td= registration.course.name
+    19:                 %td= registration.full_name
+    20:                 %td= registration.company
+    21:                 %td= registration.email
+  app/views/registrations/index.html.haml:18:in `block in _app_views_registrations_index_html_haml___42684871596690213_70328282644220'
+  app/views/registrations/index.html.haml:16:in `_app_views_registrations_index_html_haml___42684871596690213_70328282644220'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.9ms)
+
+
+Started GET "/registrations/new?course_id=2" for 127.0.0.1 at 2016-02-11 20:16:29 -0600
+Processing by RegistrationsController#new as HTML
+  Parameters: {"course_id"=>"2"}
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" = 2 LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (1.6ms)
+Completed 500 Internal Server Error in 4ms
+
+ActionView::Template::Error (undefined method `amount' for #<Registration:0x007fed28d0d190>):
+    12:       = f.text_field :course_id, value: 1
+    13:     .field
+    14:       = f.label :amount
+    15:       = f.text_field :amount
+    16:     .field
+    17:       = f.label :full_name
+    18:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:15:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328282051540'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328282051540'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.2ms)
+
+
+Started GET "/registrations/new" for 127.0.0.1 at 2016-02-11 20:16:32 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (1.6ms)
+Completed 500 Internal Server Error in 4ms
+
+ActionView::Template::Error (undefined method `amount' for #<Registration:0x007fed28f35210>):
+    12:       = f.text_field :course_id, value: 1
+    13:     .field
+    14:       = f.label :amount
+    15:       = f.text_field :amount
+    16:     .field
+    17:       = f.label :full_name
+    18:       = f.text_field :full_name
+  app/views/registrations/new.html.haml:15:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328282051540'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328282051540'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.2ms)
+
+
+Started GET "/registrations/new" for 127.0.0.1 at 2016-02-11 20:16:49 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (4.5ms)
+Completed 200 OK in 87ms (Views: 85.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 20:16:49 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 20:16:49 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 20:16:49 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 20:16:49 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 20:16:49 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 20:16:49 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 20:16:49 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 20:16:49 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 20:16:49 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 20:16:49 -0600
+
+
+Started POST "/registrations" for 127.0.0.1 at 2016-02-11 20:16:52 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/gXan6Bavk38j8hqHIPILljTqb1DINl+QokK5SKNlZ0=", "registration"=>{"course_id"=>"1", "full_name"=>"", "company"=>"", "email"=>"", "telephone"=>""}, "commit"=>"Registration Payment"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 2ms
+
+NoMethodError (undefined method `amount' for #<Registration:0x007fed28f06b68>):
+  app/controllers/registrations_controller.rb:22:in `create'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.5ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (13.2ms)
+
+
+Started GET "/registrations/new" for 127.0.0.1 at 2016-02-11 20:17:22 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.3ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (7.7ms)
+Completed 200 OK in 46ms (Views: 43.9ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/registrations" for 127.0.0.1 at 2016-02-11 20:17:49 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/gXan6Bavk38j8hqHIPILljTqb1DINl+QokK5SKNlZ0=", "registration"=>{"course_id"=>"1", "full_name"=>"Marco", "company"=>"Marco", "email"=>"Marco", "telephone"=>"MArco"}, "commit"=>"Registration Payment"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+Completed 500 Internal Server Error in 2ms
+
+NoMethodError (undefined method `amount' for #<Registration:0x007fed255112f0>):
+  app/controllers/registrations_controller.rb:22:in `create'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.5ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.2ms)
+
+
+Started POST "/registrations" for 127.0.0.1 at 2016-02-11 20:18:12 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/gXan6Bavk38j8hqHIPILljTqb1DINl+QokK5SKNlZ0=", "registration"=>{"course_id"=>"1", "full_name"=>"Marco", "company"=>"Marco", "email"=>"Marco", "telephone"=>"MArco"}, "commit"=>"Registration Payment"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+Completed 500 Internal Server Error in 12ms
+
+NoMethodError (undefined method `amount' for #<Registration:0x007fed289864b8>):
+  app/controllers/registrations_controller.rb:22:in `create'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.5ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (14.0ms)
+
+
+Started POST "/registrations" for 127.0.0.1 at 2016-02-11 20:18:36 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/gXan6Bavk38j8hqHIPILljTqb1DINl+QokK5SKNlZ0=", "registration"=>{"course_id"=>"1", "full_name"=>"Marco", "company"=>"Marco", "email"=>"Marco", "telephone"=>"MArco"}, "commit"=>"Registration Payment"}
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+Completed 500 Internal Server Error in 10ms
+
+NoMethodError (undefined method `amount' for #<Registration:0x007fed28e4f238>):
+  app/controllers/registrations_controller.rb:22:in `create'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (13.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:18:56 -0600
+Processing by RegistrationsController#new as HTML
+  Rendered registrations/new.html.haml within layouts/application (2.5ms)
+Completed 200 OK in 79ms (Views: 78.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 20:18:56 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 20:18:56 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 20:18:56 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 20:18:56 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 20:18:56 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 20:18:56 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 20:18:56 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 20:18:56 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 20:18:56 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 20:18:56 -0600
+
+
+Started POST "/registrations" for 127.0.0.1 at 2016-02-11 20:19:35 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/gXan6Bavk38j8hqHIPILljTqb1DINl+QokK5SKNlZ0=", "registration"=>{"course_id"=>"1", "full_name"=>"Marco", "company"=>"Marco", "email"=>"Marco", "telephone"=>"MArco"}, "commit"=>"Registration Payment"}
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "registrations" ("company", "course_id", "created_at", "email", "full_name", "notification_params", "telephone", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["company", "Marco"], ["course_id", 1], ["created_at", "2016-02-12 02:19:35.280744"], ["email", "Marco"], ["full_name", "Marco"], ["notification_params", "--- {}\n"], ["telephone", "MArco"], ["updated_at", "2016-02-12 02:19:35.280744"]]
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1  [["id", 1]]
+Redirected to https://www.sandbox.paypal.com/cgi-bin/webscr?amount=475&business=proyectokristen-facilitator%40gmail.com&cmd=_xclick&invoice=5&item_name=INTRODUCTION+TO+REPOSTERY+%284+Weeks%29&item_number=1&notify_url=http%3A%2F%2F0a9eaa74.ngrok.io%2Fhook&quantity=1&return=http%3A%2F%2F0a9eaa74.ngrok.io%2Fregistrations%2F5&upload=1
+Completed 302 Found in 18ms (ActiveRecord: 3.1ms)
+
+
+Started GET "/registrations/new" for 127.0.0.1 at 2016-02-11 20:20:53 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (2.2ms)
+Completed 500 Internal Server Error in 9ms
+
+SyntaxError (/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:13: syntax error, unexpected ':'
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:16: syntax error, unexpected '=', expecting ')'
+));}\n    <!-- /= f.text_field :amount -->\n  ...
+                 ^
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:16: syntax error, unexpected $undefined, expecting keyword_do_LAMBDA or tLAMBEG
+...-- /= f.text_field :amount -->\n  </div>\n  <div class='fiel...
+...                               ^
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:20: unknown regexp options - dv
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:20: syntax error, unexpected $undefined
+));}\n  </div>\n  <div class='field'>\n    #{
+               ^
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:20: syntax error, unexpected keyword_class, expecting keyword_do or '{' or '('
+));}\n  </div>\n  <div class='field'>\n    #{
+                            ^
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:20: syntax error, unexpected $undefined
+));}\n  </div>\n  <div class='field'>\n    #{
+                                      ^
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:22: syntax error, unexpected '}', expecting ')'
+));}\n    #{_hamlout.format_scrip...
+    ^
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:23: syntax error, unexpected '}', expecting tSTRING_DEND
+));}\n  </div>\n  <div class='field'>\n    #{
+    ^
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:26: unknown regexp options - dv
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:26: syntax error, unexpected $undefined
+));}\n  </div>\n  <div class='field'>\n    #{
+               ^
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:26: syntax error, unexpected keyword_class, expecting keyword_do or '{' or '('
+));}\n  </div>\n  <div class='field'>\n    #{
+                            ^
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:26: syntax error, unexpected $undefined
+));}\n  </div>\n  <div class='field'>\n    #{
+                                      ^
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:28: syntax error, unexpected '}', expecting tSTRING_DEND
+));}\n    #{_hamlout.format_scrip...
+    ^
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:31: unknown regexp options - dv
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:31: syntax error, unexpected $undefined
+));}\n  </div>\n", -1, false);end;_hamlout.b...
+               ^
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:31: syntax error, unexpected $undefined, expecting tSTRING_DEND
+...aml_temp);_hamlout.push_text("\n</div>\n", -1, false);::Haml...
+...                               ^
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:31: unterminated regexp meets end of file
+/Users/MarcoLopez/Desktop/SextoSemestre/LDAW/PayPalTutorial/paypal-basics/app/views/registrations/new.html.haml:31: syntax error, unexpected end-of-input, expecting tSTRING_DEND):
+  app/views/registrations/new.html.haml:13: syntax error, unexpected ':'
+  app/views/registrations/new.html.haml:16: syntax error, unexpected '=', expecting ')'
+  app/views/registrations/new.html.haml:16: syntax error, unexpected $undefined, expecting keyword_do_LAMBDA or tLAMBEG
+  app/views/registrations/new.html.haml:20: unknown regexp options - dv
+  app/views/registrations/new.html.haml:20: syntax error, unexpected $undefined
+  app/views/registrations/new.html.haml:20: syntax error, unexpected keyword_class, expecting keyword_do or '{' or '('
+  app/views/registrations/new.html.haml:20: syntax error, unexpected $undefined
+  app/views/registrations/new.html.haml:22: syntax error, unexpected '}', expecting ')'
+  app/views/registrations/new.html.haml:23: syntax error, unexpected '}', expecting tSTRING_DEND
+  app/views/registrations/new.html.haml:26: unknown regexp options - dv
+  app/views/registrations/new.html.haml:26: syntax error, unexpected $undefined
+  app/views/registrations/new.html.haml:26: syntax error, unexpected keyword_class, expecting keyword_do or '{' or '('
+  app/views/registrations/new.html.haml:26: syntax error, unexpected $undefined
+  app/views/registrations/new.html.haml:28: syntax error, unexpected '}', expecting tSTRING_DEND
+  app/views/registrations/new.html.haml:31: unknown regexp options - dv
+  app/views/registrations/new.html.haml:31: syntax error, unexpected $undefined
+  app/views/registrations/new.html.haml:31: syntax error, unexpected $undefined, expecting tSTRING_DEND
+  app/views/registrations/new.html.haml:31: unterminated regexp meets end of file
+  app/views/registrations/new.html.haml:31: syntax error, unexpected end-of-input, expecting tSTRING_DEND
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.4ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (41.3ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (51.8ms)
+
+
+Started GET "/registrations/new" for 127.0.0.1 at 2016-02-11 20:21:00 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (11.6ms)
+Completed 500 Internal Server Error in 15ms
+
+ActionView::Template::Error (wrong number of arguments (0 for 1..2)):
+    10:             %li= message
+    11:     .field
+    12:       = f.hidden_field :course_id, value: 1
+    13:       = f.text_field 
+    14:     .field
+    15:       = f.label :amount
+    16:       //= f.text_field :amount
+  app/views/registrations/new.html.haml:13:in `block in _app_views_registrations_new_html_haml__3551188651822597959_70328237481860'
+  app/views/registrations/new.html.haml:2:in `_app_views_registrations_new_html_haml__3551188651822597959_70328237481860'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (11.6ms)
+
+
+Started GET "/registrations/new" for 127.0.0.1 at 2016-02-11 20:21:11 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (4.4ms)
+Completed 200 OK in 41ms (Views: 39.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:11 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:11 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:11 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 20:21:11 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:11 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:11 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:11 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 20:21:11 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 20:21:11 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 20:21:11 -0600
+
+
+Started GET "/registrations/new" for 127.0.0.1 at 2016-02-11 20:21:28 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (4.1ms)
+Completed 200 OK in 94ms (Views: 92.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:28 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:28 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:28 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:28 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:28 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:28 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 20:21:28 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 20:21:28 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 20:21:28 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 20:21:28 -0600
+
+
+Started GET "/registrations/new" for 127.0.0.1 at 2016-02-11 20:21:33 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (4.3ms)
+Completed 200 OK in 41ms (Views: 39.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:33 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:33 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:33 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:33 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:33 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 20:21:33 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 20:21:33 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 20:21:33 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 20:21:33 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 20:21:33 -0600
+
+
+Started POST "/registrations" for 127.0.0.1 at 2016-02-11 20:21:48 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/gXan6Bavk38j8hqHIPILljTqb1DINl+QokK5SKNlZ0=", "registration"=>{"course_id"=>"1", "full_name"=>"Marco", "company"=>"ITESM", "email"=>"marcolm485@gmail.com", "telephone"=>"4421913476"}, "commit"=>"Registration Payment"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "registrations" ("company", "course_id", "created_at", "email", "full_name", "notification_params", "telephone", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["company", "ITESM"], ["course_id", 1], ["created_at", "2016-02-12 02:21:48.596383"], ["email", "marcolm485@gmail.com"], ["full_name", "Marco"], ["notification_params", "--- {}\n"], ["telephone", "4421913476"], ["updated_at", "2016-02-12 02:21:48.596383"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1[0m  [["id", 1]]
+Redirected to https://www.sandbox.paypal.com/cgi-bin/webscr?amount=475&business=proyectokristen-facilitator%40gmail.com&cmd=_xclick&invoice=6&item_name=INTRODUCTION+TO+REPOSTERY+%284+Weeks%29&item_number=1&notify_url=http%3A%2F%2F0a9eaa74.ngrok.io%2Fhook&quantity=1&return=http%3A%2F%2F0a9eaa74.ngrok.io%2Fregistrations%2F6&upload=1
+Completed 302 Found in 9ms (ActiveRecord: 1.8ms)
+  [1m[36mCourse Load (0.2ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCourse Load (2.8ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCourse Load (0.2ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1  [["id", 1]]
+
+
+Started GET "/registrations/new" for 127.0.0.1 at 2016-02-11 20:24:40 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (20.1ms)
+Completed 200 OK in 212ms (Views: 179.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/registrations/1" for 127.0.0.1 at 2016-02-11 20:24:41 -0600
+Processing by RegistrationsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRegistration Load (0.2ms)[0m  [1mSELECT  "registrations".* FROM "registrations"  WHERE "registrations"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1  [["id", 3]]
+  Rendered registrations/show.html.haml within layouts/application (16.9ms)
+Completed 200 OK in 54ms (Views: 52.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 20:24:41 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 20:24:41 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 20:24:41 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 20:24:41 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 20:24:41 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 20:24:41 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 20:24:41 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 20:24:41 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 20:24:41 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 20:24:41 -0600
+
+
+Started GET "/fonts/MYRIADPRO-BILD.OTF" for 127.0.0.1 at 2016-02-11 20:24:41 -0600
+
+ActionController::RoutingError (No route matches [GET] "/fonts/MYRIADPRO-BILD.OTF"):
+  actionpack (4.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.6) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.6) lib/rails/engine.rb:514:in `call'
+  railties (4.1.6) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.2ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.6ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (22.1ms)
+
+
+Started GET "/assets/MYRIADPRO-REGULAR.OTF" for 127.0.0.1 at 2016-02-11 20:24:41 -0600
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCourse Load (3.3ms)[0m  SELECT  "courses".* FROM "courses"  WHERE (1) LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE "courses" SET "name" = ?, "updated_at" = ? WHERE "courses"."id" = 1  [["name", "Donation"], ["updated_at", "2016-02-12 02:26:35.126317"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mCourse Load (2.2ms)[0m  SELECT  "courses".* FROM "courses"  WHERE (1) LIMIT 1
+
+
+Started POST "/registrations" for 127.0.0.1 at 2016-02-11 20:26:58 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/gXan6Bavk38j8hqHIPILljTqb1DINl+QokK5SKNlZ0=", "registration"=>{"course_id"=>"1", "full_name"=>"Marco", "company"=>"ITESM", "email"=>"marcolm485@gmail.com", "telephone"=>"4421913476"}, "commit"=>"Registration Payment"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "registrations" ("company", "course_id", "created_at", "email", "full_name", "notification_params", "telephone", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["company", "ITESM"], ["course_id", 1], ["created_at", "2016-02-12 02:26:58.792660"], ["email", "marcolm485@gmail.com"], ["full_name", "Marco"], ["notification_params", "--- {}\n"], ["telephone", "4421913476"], ["updated_at", "2016-02-12 02:26:58.792660"]]
+  [1m[35m (0.4ms)[0m  commit transaction
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1[0m  [["id", 1]]
+Redirected to https://www.sandbox.paypal.com/cgi-bin/webscr?amount=475&business=proyectokristen-facilitator%40gmail.com&cmd=_xclick&invoice=7&item_name=Donation&item_number=1&notify_url=http%3A%2F%2F0a9eaa74.ngrok.io%2Fhook&quantity=1&return=http%3A%2F%2F0a9eaa74.ngrok.io%2Fregistrations%2F7&upload=1
+Completed 302 Found in 55ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/registrations/new" for 127.0.0.1 at 2016-02-11 20:27:04 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (11.6ms)
+Completed 200 OK in 177ms (Views: 132.4ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/registrations" for 127.0.0.1 at 2016-02-11 20:27:10 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/gXan6Bavk38j8hqHIPILljTqb1DINl+QokK5SKNlZ0=", "registration"=>{"course_id"=>"1", "full_name"=>"", "company"=>"", "email"=>"", "telephone"=>""}, "commit"=>"Registration Payment"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  Rendered registrations/new.html.haml within layouts/application (6.8ms)
+Completed 200 OK in 92ms (Views: 88.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:10 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:10 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:10 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:10 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:10 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 20:27:10 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:10 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 20:27:10 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 20:27:10 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 20:27:10 -0600
+
+
+Started POST "/registrations" for 127.0.0.1 at 2016-02-11 20:27:43 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/gXan6Bavk38j8hqHIPILljTqb1DINl+QokK5SKNlZ0=", "registration"=>{"course_id"=>"1", "full_name"=>"", "company"=>"", "email"=>"", "telephone"=>""}, "commit"=>"Registration Payment"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  Rendered registrations/new.html.haml within layouts/application (7.2ms)
+Completed 200 OK in 48ms (Views: 45.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:43 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:43 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:43 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:43 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:43 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:43 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 20:27:43 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 20:27:43 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 20:27:43 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 20:27:43 -0600
+
+
+Started GET "/registrations" for 127.0.0.1 at 2016-02-11 20:27:47 -0600
+Processing by RegistrationsController#index as HTML
+  [1m[36mRegistration Load (0.2ms)[0m  [1mSELECT "registrations".* FROM "registrations"[0m
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered registrations/index.html.haml within layouts/application (6.8ms)
+Completed 500 Internal Server Error in 11ms
+
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    15:           %tbody
+    16:             - @registrations.each do |registration|
+    17:               %tr
+    18:                 %td= registration.course.name
+    19:                 %td= registration.full_name
+    20:                 %td= registration.company
+    21:                 %td= registration.email
+  app/views/registrations/index.html.haml:18:in `block in _app_views_registrations_index_html_haml___3408177200683091820_70264206810360'
+  app/views/registrations/index.html.haml:16:in `_app_views_registrations_index_html_haml___3408177200683091820_70264206810360'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (11.3ms)
+
+
+Started GET "/registrations/new" for 127.0.0.1 at 2016-02-11 20:27:50 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (2.1ms)
+Completed 200 OK in 42ms (Views: 40.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/registrations/new" for 127.0.0.1 at 2016-02-11 20:27:51 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.2ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (2.1ms)
+Completed 200 OK in 42ms (Views: 40.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:51 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:51 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:51 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:51 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:51 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 20:27:51 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 20:27:51 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 20:27:51 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 20:27:51 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 20:27:51 -0600
+
+
+Started GET "/registrations" for 127.0.0.1 at 2016-02-11 20:29:01 -0600
+Processing by RegistrationsController#index as HTML
+  [1m[35mRegistration Load (0.2ms)[0m  SELECT "registrations".* FROM "registrations"
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered registrations/index.html.haml within layouts/application (3.4ms)
+Completed 500 Internal Server Error in 6ms
+
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    15:           %tbody
+    16:             - @registrations.each do |registration|
+    17:               %tr
+    18:                 %td= registration.course.name
+    19:                 %td= registration.full_name
+    20:                 %td= registration.company
+    21:                 %td= registration.email
+  app/views/registrations/index.html.haml:18:in `block in _app_views_registrations_index_html_haml___3408177200683091820_70264206810360'
+  app/views/registrations/index.html.haml:16:in `_app_views_registrations_index_html_haml___3408177200683091820_70264206810360'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-4.1.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (9.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:29:02 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[36mCourse Load (0.1ms)[0m  [1mSELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1[0m
+  Rendered registrations/new.html.haml within layouts/application (2.4ms)
+Completed 200 OK in 40ms (Views: 38.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-02-11 20:29:02 -0600
+Processing by RegistrationsController#new as HTML
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses"  WHERE "courses"."id" IS NULL LIMIT 1
+  Rendered registrations/new.html.haml within layouts/application (2.4ms)
+Completed 200 OK in 40ms (Views: 38.5ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/bootstrap.min.css?body=1" for 127.0.0.1 at 2016-02-11 20:29:02 -0600
+
+
+Started GET "/assets/fonts.css?body=1" for 127.0.0.1 at 2016-02-11 20:29:02 -0600
+
+
+Started GET "/assets/form.css?body=1" for 127.0.0.1 at 2016-02-11 20:29:02 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-02-11 20:29:02 -0600
+
+
+Started GET "/assets/front.css?body=1" for 127.0.0.1 at 2016-02-11 20:29:02 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-02-11 20:29:02 -0600
+
+
+Started GET "/assets/normalize.css?body=1" for 127.0.0.1 at 2016-02-11 20:29:02 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-02-11 20:29:02 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-02-11 20:29:02 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-02-11 20:29:02 -0600
